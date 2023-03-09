@@ -35,9 +35,7 @@ public class PostoCombustivel {
                 desconto = 0.06; // Aplica um desconto de 6%
             }
             precoLitro = 6.0; // Define o preço por litro como 6.0 (preço da gasolina)
-
-
-        }
+        } 
         //#endregion GASOLINA
 
         //#region ALCOOL
