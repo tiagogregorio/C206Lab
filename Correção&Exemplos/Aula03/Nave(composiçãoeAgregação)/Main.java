@@ -11,15 +11,13 @@ public class Main {
         adicionamos pelo construtor ou um método adicionarArma, passando a referência da Arma como
         parâmetro.
  */
-
-
         //instanciando uma nave
         //adicionando por Composicao
         Nave n1 = new Nave("Falcon", 500, false, "FOGO", 500);
 
         //instanciando uma arma
-        //Arma a1 = new Arma("Fogo", 300);
-        //metodo para adicionar uma arma por meio da Agragacao
+        Arma a1 = new Arma("Fogo", 300);
+        //metodo para adicionar uma arma por meio da Agregacao
         n1.addArma(a1);
         n1.MostraInfo();
     }
