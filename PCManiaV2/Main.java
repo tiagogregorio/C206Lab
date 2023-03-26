@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static <nome1> void main(String[] args) {
+    public static void main(String[] args) {
 
         Cliente client = new Cliente();//Nome e CPF do Cliente
         client.nome = "Ze do Bit Carry";
@@ -60,6 +60,7 @@ public class Main {
                     MemoriaUSB memoria1 = new MemoriaUSB(); //Criando memória nome
                     memoria1.nome[0] = "Pen-drive"; //Atribuindo valores para Memória
                     memoria1.capacidade[0] = 16;
+                    computador1.addMemoriaUSB(memoria1);//Adicionando memória no Computador 1
                     computador1.memoria = memoria1;//Associação
                     client.comp1++;//Contador de computador1
                     computador1.sisoperacional.nome = "Linux Ubuntu";
@@ -77,6 +78,7 @@ public class Main {
                     memoria2.nome[1] = "Pen-drive"; //Atribuindo nome memoria 2
                     memoria2.capacidade[1] = 32; // Capacidade mmemoria 2
                     computador2.memoria = memoria2; // Associando computador 2
+                    computador2.addMemoriaUSB(memoria2);//Adicionando memória no Computador 2
                     computador2.sisoperacional.nome = "Windows 8";
                     computador2.sisoperacional.tipo = 64;
                     System.out.println("Adicionando computador da Promoção 2 no carrinho...\n");
@@ -93,6 +95,7 @@ public class Main {
                     MemoriaUSB memoria3 = new MemoriaUSB(); //Criando memória
                     memoria3.nome[2] = "HD externo"; // Atribuindo memoria 3
                     memoria3.capacidade[2] = 1000; // Capacidade memoria 3
+                    computador3.addMemoriaUSB(memoria3);//Adicionando memória no Computador 3
                     computador3.memoria = memoria3; // associação
                     computador3.sisoperacional.nome = "Windows 10";
                     computador3.sisoperacional.tipo = 64;
