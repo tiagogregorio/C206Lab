@@ -34,16 +34,22 @@ public class Main {
                     if (client.comp1 > 0) {
                         System.out.println("\nPC(s) da Promoçao 1 - Quantidade: " + client.comp1 + " Item(s)");
                         computador1.mostraPCConfigs();
+                        System.out.println("Processador: " + computador1.hardwareb.nome[0] + computador1.hardwareb.capacidade[0] + "Mhz");
+                        System.out.println("Memória Ram: " + computador1.hardwareb.capacidade[1] + "Gb " + " Armazenamento: " + computador1.hardwareb.capacidade[2] + "Gb");
                         valortotal = (client.comp1 * computador1.preco) + (client.comp2 * computador2.preco) + (client.comp3 * computador3.preco);
                     }
                     if (client.comp2 > 0) {
                         System.out.println("\nPC(s) da Promoçao 2 - Quantidade: " + client.comp2 + " Item(s)");
                         computador2.mostraPCConfigs();
+                        System.out.println("Processador: " + computador2.hardwareb.nome[1] + computador2.hardwareb.capacidade[0] + "Mhz");
+                        System.out.println("Memória Ram: " + computador2.hardwareb.capacidade[1] + "Gb " + " Armazenamento: " + computador2.hardwareb.capacidade[2] + "Gb");
                         valortotal = (client.comp1 * computador1.preco) + (client.comp2 * computador2.preco) + (client.comp3 * computador3.preco);
                     }
                     if (client.comp3 > 0) {
                         System.out.println("\nPC(s) da Promoçao 3 - Quantidade: " + client.comp3 + " Item(s)");
                         computador3.mostraPCConfigs();
+                        System.out.println("Processador: " + computador3.hardwareb.nome[2] + computador3.hardwareb.capacidade[0] + "Mhz");
+                        System.out.println("Memória Ram: " + computador3.hardwareb.capacidade[1] + "Gb " + " Armazenamento: " + computador3.hardwareb.capacidade[2] + "Gb");
                         valortotal = (client.comp1 * computador1.preco) + (client.comp2 * computador2.preco) + (client.comp3 * computador3.preco);
                     }
                     System.out.println("\n----------------- Pagador -----------------");
@@ -59,13 +65,13 @@ public class Main {
                     System.out.println("Adicionando computador da Promoção 1 no carrinho...\n");
                     MemoriaUSB memoria1 = new MemoriaUSB(); //Criando memória nome
                     memoria1.nome[0] = "Pen-drive"; //Atribuindo valores para Memória
-                    memoria1.capacidade[0] = 16;
+                    memoria1.capacidade[0] = 16; //Pendrive
                     computador1.addMemoriaUSB(memoria1);//Adicionando memória no Computador 1
                     computador1.memoria = memoria1;//Associação
                     client.comp1++;//Contador de computador1
                     computador1.sisoperacional.nome = "Linux Ubuntu";
                     computador1.sisoperacional.tipo = 32;
-                    computador1.hardwareb.nome[0] = "Pentium Core i3, Memória RAM, HD ";
+                    computador1.hardwareb.nome[0] = "Pentium Core i3 ";
                     computador1.hardwareb.capacidade[0] = 2200f; //Processador
                     computador1.hardwareb.capacidade[1] = 8f; //Ram
                     computador1.hardwareb.capacidade[2] = 500f; // HD
@@ -83,7 +89,7 @@ public class Main {
                     computador2.sisoperacional.tipo = 64;
                     System.out.println("Adicionando computador da Promoção 2 no carrinho...\n");
                     client.comp2++;//Contador de computador2
-                    computador2.hardwareb.nome[1] = "Pentium Core i5, Memória RAM, HD ";
+                    computador2.hardwareb.nome[1] = "Pentium Core i5 ";
                     computador2.hardwareb.capacidade[0] = 3370f; //Processador
                     computador2.hardwareb.capacidade[1] = 16f; //Ram
                     computador2.hardwareb.capacidade[2] = 1000f; // HD
@@ -101,7 +107,7 @@ public class Main {
                     computador3.sisoperacional.tipo = 64;
                     System.out.println("Adicionando computador da Promoção 3 no carrinho...\n");
                     client.comp3++;//Contador de computador3
-                    computador3.hardwareb.nome[2] = "Pentium Core i7, Memória RAM, HD ";
+                    computador3.hardwareb.nome[2] = "Pentium Core i7 ";
                     computador3.hardwareb.capacidade[0] = 4500f; //Processador
                     computador3.hardwareb.capacidade[1] = 32f; //Ram
                     computador3.hardwareb.capacidade[2] = 2000f; // HD
