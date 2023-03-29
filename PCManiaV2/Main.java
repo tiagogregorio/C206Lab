@@ -1,125 +1,142 @@
-import java.util.Scanner;
+import java.util.Scanner; // Importando o pacote Scanner da biblioteca Java Util
 
 public class Main {
     public static void main(String[] args) {
 
+        // Criando instância do objeto Cliente e preenchendo seus atributos nome e cpf
         Cliente client = new Cliente();//Nome e CPF do Cliente
         client.nome = "Ze do Bit Carry";
         client.cpf = 245634823;
 
-        float valortotal = 0; //Armazenar a soma do valor de todos os PCs vendidos
-
-        //#region Estanciando Computador
+        // Instanciando três objetos Computador
         Computador computador1 = new Computador();
         Computador computador2 = new Computador();
         Computador computador3 = new Computador();
+
+        //#region COMPUTADOR DA PROMOCAO 1
+        // Instanciando posições do hardware básico de cada objeto Computador
+        for (int i = 0; i < computador1.hardwareb.length; i++) {
+            computador1.hardwareb[i] = new HardwareBasico();
+        }
+        //preenchendo as informações do Sistema Operacional do PC
+        computador1.marca = "Positivo";
+        computador1.preco = 2300;
+        computador1.sisoperacional.nome = "Linux Ubuntu";
+        computador1.sisoperacional.tipo = 32;
+        //preenchendo as informações do hardware basico
+        computador1.hardwareb[0].nome = "Pentium Core i3 ";
+        computador1.hardwareb[0].capacidade = 2200f; //Processador
+        computador1.hardwareb[1].capacidade = 8f; //Ram
+        computador1.hardwareb[2].capacidade = 500f; // HD
+        // Criando instância do objeto MemoriaUSB, preenchendo seus atributos capacidade e nome, e adicionando-a ao Computador1
+        MemoriaUSB musb1 = new MemoriaUSB(); // somente criei o campo e dentro tenho null
+        musb1.capacidade = 16;
+        musb1.nome = "Pen-drive";
+        computador1.addMemoriaUSB(musb1); // aqui realmente tenho  salvo dentro da memoria
+        //#endregion
+
+        //#region COMPUTADOR DA PROMOCAO 2
+        // Instanciando posições do hardware básico de cada objeto Computador
+        for (int i = 0; i < computador2.hardwareb.length; i++) {
+            computador2.hardwareb[i] = new HardwareBasico();
+        }
+        // Preenchendo as informações do Sistema Operacional do PC
+        computador2.marca = "Acer";
+        computador2.preco = 5800;
+        computador2.sisoperacional.nome = "Windows 8";
+        computador2.sisoperacional.tipo = 64;
+        // Preenchendo as informações do hardware básico
+        computador2.hardwareb[0].nome = "Pentium Core i5 ";
+        computador2.hardwareb[0].capacidade = 3370f; //Processador
+        computador2.hardwareb[1].capacidade = 16f; //Ram
+        computador2.hardwareb[2].capacidade = 1000f; // HD
+        // Criando instância do objeto MemoriaUSB, preenchendo seus atributos capacidade e nome, e adicionando-a ao Computador2
+        MemoriaUSB musb2 = new MemoriaUSB(); // somente criei o campo e dentro tenho null
+        musb2.capacidade = 32;
+        musb2.nome = "Pen-drive";
+        computador2.addMemoriaUSB(musb2); // aqui realmente tenho  salvo dentro da memoria
+        //#endregion
+
+        //#region COMPUTADOR DA PROMOCAO 3
+        //instanciando posições de hardware basico
+        for (int i = 0; i < computador3.hardwareb.length; i++) {
+            computador3.hardwareb[i] = new HardwareBasico();
+        }
+        computador3.marca = "Vaio";
+        computador3.preco = 1800;
+        computador3.sisoperacional.nome = "Windows 10";
+        computador3.sisoperacional.tipo = 64;
+        computador3.hardwareb[0].nome = "Pentium Core i7 ";
+        computador3.hardwareb[0].capacidade = 4500f; //Processador
+        computador3.hardwareb[1].capacidade = 32f; //Ram
+        computador3.hardwareb[2].capacidade = 2000f; // HD
+        // Criando instância do objeto MemoriaUSB, preenchendo seus atributos capacidade e nome, e adicionando-a ao Computador3
+        MemoriaUSB musb3 = new MemoriaUSB(); // somente criei o campo e dentro tenho null
+        musb3.capacidade = 1000;
+        musb3.nome = "HD Externo";
+        computador3.addMemoriaUSB(musb3); // aqui realmente tenho  salvo dentro da memoria
         //#endregion
 
         //#region Menu
-        Scanner sc = new Scanner(System.in);
-        int opcao = -1;
-        while (opcao != 0) {
-            System.out.println("Escolha uma opção:");
+        Scanner sc = new Scanner(System.in); // instância da classe Scanner, que é usada para ler a entrada do usuário no console
+        int opcao = -1; //variável "opcao" é declarada e inicializada com o valor -1
+        while (opcao != 0) { //loop while que continua enquanto a variável "opcao" for diferente de 0
+            System.out.println("\n*************************** Bem vindo ***************************");
             System.out.println("Digite 1 para comprar computador que esta na Promoção 1 ");
             System.out.println("Digite 2 para comprar computador que esta na Promoção 2 ");
             System.out.println("Digite 3 para comprar computador que esta na Promoção 3 ");
             System.out.println("Digite 0 para fechar compra");
 
-            opcao = sc.nextInt();
+            opcao = sc.nextInt();//lê a entrada do usuário no console e armazena o valor na variável "opcao".
             sc.nextLine();//limpar o buffer
+
             switch (opcao) {
-                case 0:
-                    System.out.println("----------------- Produtos ----------------- ");
-
-                    if (client.comp1 > 0) {
-                        System.out.println("\nPC(s) da Promoçao 1 - Quantidade: " + client.comp1 + " Item(s)");
-                        computador1.mostraPCConfigs();
-                        System.out.println("Processador: " + computador1.hardwareb.nome[0] + computador1.hardwareb.capacidade[0] + "Mhz");
-                        System.out.println("Memória Ram: " + computador1.hardwareb.capacidade[1] + "Gb " + " Armazenamento: " + computador1.hardwareb.capacidade[2] + "Gb");
-                        valortotal = (client.comp1 * computador1.preco) + (client.comp2 * computador2.preco) + (client.comp3 * computador3.preco);
+                case 0: //lista todos os computadores que foram adicionados ao carrinho, juntamente com o nome e CPF do cliente, e exibe o valor total a ser pago pela compra
+                    System.out.println("\n----------------- Produtos -----------------");
+                    for (int i = 0; i < client.computadores.length; i++) {
+                        if (client.computadores[i] != null) { //Mostra computadores[i] forem diferente de vazio e chama metodo mostraPCConfigs()
+                            client.computadores[i].mostraPCConfigs();
+                        }
                     }
-                    if (client.comp2 > 0) {
-                        System.out.println("\nPC(s) da Promoçao 2 - Quantidade: " + client.comp2 + " Item(s)");
-                        computador2.mostraPCConfigs();
-                        System.out.println("Processador: " + computador2.hardwareb.nome[1] + computador2.hardwareb.capacidade[0] + "Mhz");
-                        System.out.println("Memória Ram: " + computador2.hardwareb.capacidade[1] + "Gb " + " Armazenamento: " + computador2.hardwareb.capacidade[2] + "Gb");
-                        valortotal = (client.comp1 * computador1.preco) + (client.comp2 * computador2.preco) + (client.comp3 * computador3.preco);
-                    }
-                    if (client.comp3 > 0) {
-                        System.out.println("\nPC(s) da Promoçao 3 - Quantidade: " + client.comp3 + " Item(s)");
-                        computador3.mostraPCConfigs();
-                        System.out.println("Processador: " + computador3.hardwareb.nome[2] + computador3.hardwareb.capacidade[0] + "Mhz");
-                        System.out.println("Memória Ram: " + computador3.hardwareb.capacidade[1] + "Gb " + " Armazenamento: " + computador3.hardwareb.capacidade[2] + "Gb");
-                        valortotal = (client.comp1 * computador1.preco) + (client.comp2 * computador2.preco) + (client.comp3 * computador3.preco);
-                    }
-                    System.out.println("\n----------------- Pagador -----------------");
+                    System.out.println("\n------------------ Pagador ------------------");
                     System.out.println("Nome: " + client.nome + "       CPF: " + client.cpf);
-
-                    client.conta = valortotal;
-                    System.out.printf("Valor a pagar (Total) = R$ %.2f\n", client.calculaTotalCompra());
-                    System.out.println("------------------------------------------");
+                    System.out.printf("Valor a pagar (Total) = R$ %.2f\n", client.calculaTotalCompra()); // Calcula e printa o valor da compra com 2 casas decimais
+                    System.out.println("--------------------------------------------");
                     System.out.println("         Obrigado!Volte Sempre!  ");
                     break;
 
                 case 1:
                     System.out.println("Adicionando computador da Promoção 1 no carrinho...\n");
-                    MemoriaUSB memoria1 = new MemoriaUSB(); //Criando memória nome
-                    memoria1.nome[0] = "Pen-drive"; //Atribuindo valores para Memória
-                    memoria1.capacidade[0] = 16; //Pendrive
-                    computador1.addMemoriaUSB(memoria1);//Adicionando memória no Computador 1
-                    computador1.memoria = memoria1;//Associação
-                    client.comp1++;//Contador de computador1
-                    computador1.sisoperacional.nome = "Linux Ubuntu";
-                    computador1.sisoperacional.tipo = 32;
-                    computador1.hardwareb.nome[0] = "Pentium Core i3 ";
-                    computador1.hardwareb.capacidade[0] = 2200f; //Processador
-                    computador1.hardwareb.capacidade[1] = 8f; //Ram
-                    computador1.hardwareb.capacidade[2] = 500f; // HD
-                    computador1.marca = "Positivo";
-                    computador1.preco = 2300;
+                    for (int i = 0; i < client.computadores.length && i < client.computadores.length; i++) {
+                        if (client.computadores[i] == null) { //Adiciona nas posições que estão vazias, por isso == null
+                            client.computadores[i] = computador1;
+                            break;
+                        }
+                    }
                     break;
-
                 case 2:
-                    MemoriaUSB memoria2 = new MemoriaUSB(); //Criando memória 2
-                    memoria2.nome[1] = "Pen-drive"; //Atribuindo nome memoria 2
-                    memoria2.capacidade[1] = 32; // Capacidade mmemoria 2
-                    computador2.memoria = memoria2; // Associando computador 2
-                    computador2.addMemoriaUSB(memoria2);//Adicionando memória no Computador 2
-                    computador2.sisoperacional.nome = "Windows 8";
-                    computador2.sisoperacional.tipo = 64;
                     System.out.println("Adicionando computador da Promoção 2 no carrinho...\n");
-                    client.comp2++;//Contador de computador2
-                    computador2.hardwareb.nome[1] = "Pentium Core i5 ";
-                    computador2.hardwareb.capacidade[0] = 3370f; //Processador
-                    computador2.hardwareb.capacidade[1] = 16f; //Ram
-                    computador2.hardwareb.capacidade[2] = 1000f; // HD
-                    computador2.marca = "Acer";
-                    computador2.preco = 5800;
+                    for (int i = 0; i < client.computadores.length && i < client.computadores.length; i++) {
+                        if (client.computadores[i] == null) {//Adiciona nas posições que estão vazias, por isso == null
+                            client.computadores[i] = computador2;
+                            break;
+                        }
+                    }
                     break;
-
                 case 3:
-                    MemoriaUSB memoria3 = new MemoriaUSB(); //Criando memória
-                    memoria3.nome[2] = "HD externo"; // Atribuindo memoria 3
-                    memoria3.capacidade[2] = 1000; // Capacidade memoria 3
-                    computador3.addMemoriaUSB(memoria3);//Adicionando memória no Computador 3
-                    computador3.memoria = memoria3; // associação
-                    computador3.sisoperacional.nome = "Windows 10";
-                    computador3.sisoperacional.tipo = 64;
                     System.out.println("Adicionando computador da Promoção 3 no carrinho...\n");
-                    client.comp3++;//Contador de computador3
-                    computador3.hardwareb.nome[2] = "Pentium Core i7 ";
-                    computador3.hardwareb.capacidade[0] = 4500f; //Processador
-                    computador3.hardwareb.capacidade[1] = 32f; //Ram
-                    computador3.hardwareb.capacidade[2] = 2000f; // HD
-                    computador3.marca = "Vaio";
-                    computador3.preco = 1800;
+                    for (int i = 0; i < client.computadores.length && i < client.computadores.length; i++) {
+                        if (client.computadores[i] == null) {//Adiciona nas posições que estão vazias, por isso == null
+                            client.computadores[i] = computador3;
+                            break;
+                        }
+                    }
                     break;
-
                 default:
                     System.out.println("Opção inválida.");
             }
         }
-        sc.close();
+        sc.close(); //fechar o objeto Scanner sc e libera recursos do sistema
         //#endregion
     }
 }
