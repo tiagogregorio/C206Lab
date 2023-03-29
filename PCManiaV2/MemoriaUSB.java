@@ -1,8 +1,8 @@
 public class MemoriaUSB {
 
     //#region Atributos
-    String[] nome = new String[3];
-    int[] capacidade = new int[3];
+    String nome;
+    int capacidade;
 
     //#endregion
 }
