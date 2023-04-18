@@ -1,24 +1,22 @@
 public class Mago extends Habitante implements Feitico, Cura {
+    // Extends informa para a classe filha (Mago) que ela herdará da classe mae (Habitante) Os metodos
+    //Atributos de um mago
     private String cor;
 
-    public Mago(int id, String nome, int idade, float energia) {
-        super(id, nome, idade, energia);
+    public Mago(String nome, int idade, float energia) {
+        super(nome, idade, energia);
     }
 
+    //Set cor do mago
     public void setCor(String cor) {
         this.cor = cor;
     }
 
+    // Métodos reescritos da classe mãe (Habitante) - Polimorfismo
     @Override
     public void atacar() {
         System.out.println("\nMago esta atacando...");
-
-        if (Arma.getmagica() == true) {
-            energia -= energia * 0.1 + 20;
-        } else {
-            energia = energia - 10;
-        }
-        System.out.println("Energia: " + energia);
+        super.atacar();
     }
 
     @Override
@@ -38,5 +36,6 @@ public class Mago extends Habitante implements Feitico, Cura {
     public void lancaFeitico() {
         System.out.println("O mago lançou um feitiço...");
         System.out.println("Energia gasta (-10%): " + (energia - (energia * 0.1)));
+        this.energia -= (energia * 0.1);
     }
 }
