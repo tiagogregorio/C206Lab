@@ -1,4 +1,5 @@
-public class Anao extends Habitante implements Mineracao, Cura {
+public class Anao extends Habitante implements Mineracao {
+    // Atributos extras de um anão em relação ao habitante
     private float altura;
     private String reino;
 
@@ -10,32 +11,16 @@ public class Anao extends Habitante implements Mineracao, Cura {
         this.reino = reino;
     }
 
-    public Anao(int id, String nome, int idade, float energia) {
-        super(id, nome, idade, energia);
+    public Anao(String nome, int idade, float energia) {
+        super(nome, idade, energia);
     }
 
+    // Métodos reescritos da classe mãe (Habitante) - Polimorfismo
     @Override
     public void atacar() {
         System.out.println("\nAnao atacando...");
-
-        if (Arma.getmagica() == false) {
-            energia -= 20;
-        } else {
-            energia -= 10;
-        }
-        System.out.println("Energia: " + energia);
+        super.atacar(); // apontando para classe mae (atacar)
     }
-
-    @Override
-    public void curar() {
-        System.out.println("Anao foi curado em 15%, energia atual: " + (energia * 0.15 + energia));
-    }
-
-    @Override
-    public void minerar() {
-        System.out.println("O Anão esta mineirando...");
-    }
-
     @Override
     public void mostraInfo() {
         System.out.println("\n--- Infos do Anao ---");
@@ -43,4 +28,11 @@ public class Anao extends Habitante implements Mineracao, Cura {
         System.out.println("Altura: " + altura + " cm");
         System.out.println("Reino: " + reino);
     }
+
+    // Método implementado a parti da interface de mineraçã
+    @Override
+    public void minerar() {
+        System.out.println("O Anão esta mineirando...");
+    }
+
 }
