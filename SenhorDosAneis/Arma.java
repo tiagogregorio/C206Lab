@@ -1,23 +1,18 @@
 public class Arma {
+    // Atributos ( Características gerais das armas dos habitantes )
     private String nomeArma;
-    private static boolean magica;
+    private boolean magica;
 
     public Arma(String nomeArma, boolean magica) {
         this.nomeArma = nomeArma;
         this.magica = magica;
     }
 
-    public static boolean getmagica() {
+    //Getters Permitem que modifiquemos as características da arma
+    public boolean isMagica() {
         return magica;
     }
-
     public String getNomeArma() {
         return nomeArma;
     }
-
-    public void mostrarInfos() {
-        System.out.println("Arma: " + nomeArma);
-        System.out.println("Magica: " + magica);
-    }
-
 }
