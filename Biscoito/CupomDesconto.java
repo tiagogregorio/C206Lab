@@ -5,7 +5,7 @@ public class CupomDesconto {
         this.valorDesconto = valorDesconto;
     }
 
-    public  double getValorDesconto() {
+    public double getValorDesconto() {
         return valorDesconto;
     }
 }
