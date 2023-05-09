@@ -13,13 +13,10 @@ public class Biscoito implements Comparable<Biscoito> {
     }
 
     //#region Construtor
-    public Biscoito(String nome, double valor, int qtd, String sabor) throws NumeroNegativoException {
-
-        if (qtd <= 0) {
-            throw new NumeroNegativoException(this.qtd);
-        }
+    public Biscoito(String nome, double valor, int qtd, String sabor) {
         this.nome = nome;
         this.valor = valor;
+        this.qtd = qtd;
         this.sabor = sabor;
     }
     //#endregion
@@ -33,18 +30,8 @@ public class Biscoito implements Comparable<Biscoito> {
         return valor;
     }
 
-    public String getSabor() {
-        return sabor;
-    }
-
-    public void setQtd(int qtd) {
-        this.qtd = qtd;
-    }
-
     public int getQtd() {
         return qtd;
     }
-
     //#endregion
-
 }
