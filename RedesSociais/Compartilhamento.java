@@ -1,3 +1,3 @@
 public interface Compartilhamento {
-    public abstract void compartilhar();
+   public abstract void compartilhar();
 }
