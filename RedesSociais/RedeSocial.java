@@ -1,27 +1,51 @@
-public abstract class RedeSocial { //A Classe RedeSocial é abstrata
-    //#region Atributos
-    protected String senha;
-    protected int numAmigos;
-    //#endregion
-
-    //#region construtores
-    public RedeSocial(String senha, int numAmigos) {
-        this.senha = senha;
-        this.numAmigos = numAmigos;
+public class Twitter extends RedeSocial implements Compartilhamento {
+    public Twitter(String senha, int numAmigos) {
+        super(senha, numAmigos);
     }
-    //#endregion
 
-    //#region Metodos publicos e abstratos (estao em italico na UML)
-    abstract public void postarFoto(); // Método abstrato para postar foto
+    @Override
+    public void postarFoto() {
+        try {
+            System.out.println("Postou uma foto no Twitter");
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao postar a foto no Twitter: " + e.getMessage());
+        }
+    }
 
-    abstract public void postarVideo(); // Método abstrato para postar vídeo
+    @Override
+    public void postarVideo() {
+        try {
+            System.out.println("Postou um vídeo no Twitter");
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao postar o vídeo no Twitter: " + e.getMessage());
+        }
+    }
 
-    abstract public void postarComentario(); // Método abstrato para postar comentário
-    //#endregion
+    @Override
+    public void postarComentario() {
+        try {
+            System.out.println("Postou um comentário no Twitter");
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao postar o comentário no Twitter: " + e.getMessage());
+        }
+    }
 
-    //#region Metodo publico e NAO abstrato
+    @Override
     public void curtirPublicacao() {
-        System.out.print("Curtiu uma publicacao "); // Método não abstrato para curtir uma publicação
+        try {
+            super.curtirPublicacao();
+            System.out.println("no Twitter");
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao curtir a publicação no Twitter: " + e.getMessage());
+        }
     }
-}    //#endregion
 
+    @Override
+    public void compartilhar() {
+        try {
+            System.out.println("Compartilhou uma publicação no Twitter");
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao compartilhar a publicação no Twitter: " + e.getMessage());
+        }
+    }
+}
