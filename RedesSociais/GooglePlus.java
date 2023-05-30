@@ -1,5 +1,9 @@
 public class GooglePlus extends RedeSocial implements VideoConferencia, Compartilhamento {
 
+    public GooglePlus(String senha, int numAmigos) {
+        super(senha, numAmigos);
+    }
+
     //#region reescritas de Metodos
     @Override
     public void postarFoto() {
