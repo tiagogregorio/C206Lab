@@ -1,4 +1,8 @@
 public class Instagram extends RedeSocial {
+    public Instagram(String senha, int numAmigos) {
+        super(senha, numAmigos);
+    }
+
     //#region reescritas de Metodos
     @Override
     public void postarFoto() {
