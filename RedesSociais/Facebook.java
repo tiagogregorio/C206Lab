@@ -1,4 +1,8 @@
 public class Facebook extends RedeSocial implements VideoConferencia, Compartilhamento {
+    public Facebook(String senha, int numAmigos) {
+        super(senha, numAmigos);
+    }
+
     //#region reescritas de Metodos
     @Override
     public void postarFoto() {
