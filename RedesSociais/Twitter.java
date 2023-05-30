@@ -1,4 +1,8 @@
 public class Twitter extends RedeSocial implements Compartilhamento {
+    public Twitter(String senha, int numAmigos) {
+        super(senha, numAmigos);
+    }
+
     @Override
     public void postarFoto() {
         try {
