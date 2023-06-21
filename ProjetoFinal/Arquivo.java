@@ -68,9 +68,16 @@ public class Arquivo {
         return encontreiNoArquivo;
     }
 
-    public void atualizar() {
-    }
+  public void atualizar(){
 
-    public void deletar() {
+        // LEITURA DO ARQUIVO E VERIFICACAO
+
+        // CHAMAR METODO PARA ESCREVER
+    }
+    public void deletar(){
+
+        // LEITURA DO ARQUIVO E VERIFICACAO
+
+        // CHAMAR DELETAR
     }
 }
