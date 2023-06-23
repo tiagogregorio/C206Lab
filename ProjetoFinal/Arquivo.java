@@ -1,83 +1,75 @@
-import Model.RendaFixa;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.ArrayList;
 
-public class Arquivo {
+class Arquivo {
+    private String nomeArquivo;
+
     public Arquivo() {
+        this.nomeArquivo = "investimentos.txt"; // Defina o nome do arquivo
     }
 
-    public void escreverArquivo(RendaFixa fixa) {
-        OutputStream os = null;
-        OutputStreamWriter osw = null;
-        BufferedWriter bw = null;
+    public void salvar(RendaFixa rendaFixa) {
+        try (FileWriter fw = new FileWriter(nomeArquivo, true); // Abre o arquivo em modo de escrita (true indica que o conteúdo será anexado ao final do arquivo)
+             BufferedWriter bw = new BufferedWriter(fw)) { // Cria um BufferedWriter para melhorar a performance da escrita
 
-        try {
-            os = new FileOutputStream("RendaFixa.txt", true);
-            osw = new OutputStreamWriter(os);
-            bw = new BufferedWriter(osw);
-            bw.write("---------- RendaFixa ----------\n");
-            bw.write(fixa.getNome() + "\n");
-            bw.write(fixa.getProduto() + "\n");
-            bw.write(fixa.getValorInvest() + "\n");
-        } catch (FileNotFoundException var14) {
-            throw new RuntimeException(var14);
-        } catch (IOException var15) {
-            throw new RuntimeException(var15);
-        } finally {
-            try {
-                bw.close();
-            } catch (IOException var13) {
-                throw new RuntimeException(var13);
-            }
+            bw.write("---------- RendaFixa ----------\n"); // Escreve uma linha de separação
+            bw.write(rendaFixa.getNome() + "\n"); // Escreve o nome do investimento
+            bw.write(rendaFixa.getProdutos() + "\n"); // Escreve os produtos do investimento
+            bw.write(rendaFixa.getValorInvest() + "\n"); // Escreve o valor do investimento
+            bw.write("------------------------------\n"); // Escreve uma linha de separação
+        } catch (IOException e) { // Captura uma possível exceção de I/O
+            System.out.println("Erro ao salvar o investimento: " + e.getMessage()); // Exibe uma mensagem de erro caso ocorra uma exceção
         }
-
     }
 
     public ArrayList<RendaFixa> ler() {
-        ArrayList<RendaFixa> encontreiNoArquivo = new ArrayList();
-        InputStream is = null;
-        InputStreamReader isr = null;
-        BufferedReader br = null;
+        ArrayList<RendaFixa> rendaFixaEncontrados = new ArrayList<>();
 
-        try {
-            is = new FileInputStream("RendaFixa.txt");
-            isr = new InputStreamReader(is);
-            br = new BufferedReader(isr);
+        try (FileReader fr = new FileReader(nomeArquivo); // Abre o arquivo em modo de leitura
+             BufferedReader br = new BufferedReader(fr)) { // Cria um BufferedReader para melhorar a performance da leitura
 
-            for(String linhaLer = br.readLine(); linhaLer != null; linhaLer = br.readLine()) {
-                if (linhaLer.contains("---------- RendaFixa ----------")) {
-                    String nome = br.readLine();
-                    String produto = br.readLine();
-                    int ValorInvest = Integer.parseInt(br.readLine());
-                    RendaFixa auxBook = new RendaFixa(nome, produto, ValorInvest);
-                    encontreiNoArquivo.add(auxBook);
+            String linha;
+            while ((linha = br.readLine()) != null) { // Lê cada linha do arquivo até o final
+                if (linha.equals("---------- RendaFixa ----------")) { // Verifica se a linha indica um investimento de RendaFixa
+                    String nome = br.readLine(); // Lê o nome do investimento
+                    String produto = br.readLine(); // Lê os produtos do investimento
+                    int valorInvest = Integer.parseInt(br.readLine()); // Lê o valor do investimento e converte para inteiro
+                    br.readLine(); // Lê a linha vazia após cada investimento
+
+                    RendaFixa rendaFixa;
+                    if (produto.equalsIgnoreCase("CDB")) { // Verifica o tipo de produto e cria o objeto RendaFixa correspondente
+                        rendaFixa = new Cdbb(nome, valorInvest);
+                    } else if (produto.equalsIgnoreCase("Poupança")) {
+                        rendaFixa = new Poupanca(nome, valorInvest);
+                    } else {
+                        rendaFixa = new Selicc(nome, valorInvest);
+                    }
+
+                    rendaFixaEncontrados.add(rendaFixa); // Adiciona o investimento encontrado à lista
                 }
             }
-        } catch (Exception var10) {
+        } catch (FileNotFoundException e) { // Captura uma possível exceção de arquivo não encontrado
+            System.out.println("Arquivo não encontrado: " + e.getMessage()); // Exibe uma mensagem de erro caso ocorra uma exceção
+        } catch (IOException e) { // Captura uma possível exceção de I/O
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage()); // Exibe uma mensagem de erro caso ocorra uma exceção
         }
 
-        return encontreiNoArquivo;
+        return rendaFixaEncontrados; // Retorna a lista de investimentos encontrados no arquivo
     }
 
-  public void atualizar(){
+    public void reescreverArquivo(ArrayList<RendaFixa> rendaFixaEncontrados) {
+        try (FileWriter fw = new FileWriter(nomeArquivo); // Abre o arquivo em modo de escrita (o conteúdo existente será substituído)
+             BufferedWriter bw = new BufferedWriter(fw)) { // Cria um BufferedWriter para melhorar a performance da escrita
 
-        // LEITURA DO ARQUIVO E VERIFICACAO
-
-        // CHAMAR METODO PARA ESCREVER
-    }
-    public void deletar(){
-
-        // LEITURA DO ARQUIVO E VERIFICACAO
-
-        // CHAMAR DELETAR
+            for (RendaFixa rendaFixa : rendaFixaEncontrados) { // Percorre a lista de investimentos
+                bw.write("---------- RendaFixa ----------\n"); // Escreve uma linha de separação
+                bw.write(rendaFixa.getNome() + "\n"); // Escreve o nome do investimento
+                bw.write(rendaFixa.getProdutos() + "\n"); // Escreve os produtos do investimento
+                bw.write(rendaFixa.getValorInvest() + "\n"); // Escreve o valor do investimento
+                bw.write("------------------------------\n"); // Escreve uma linha de separação
+            }
+        } catch (IOException e) { // Captura uma possível exceção de I/O
+            System.out.println("Erro ao reescrever o arquivo: " + e.getMessage()); // Exibe uma mensagem de erro caso ocorra uma exceção
+        }
     }
 }
